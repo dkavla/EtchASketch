@@ -2,19 +2,32 @@ const main = document.querySelector('.main-container');
 const gridContainer = document.querySelector('.grid-container');
 const clear = document.querySelector('.clear');
 
-// let rowInput = prompt("The number of rows: ");
-// let colInput = prompt("The number of columns: ")
+let rowInput = prompt("The number of rows(must be less than of equal to 100): ");
+let colInput = prompt("The number of columns(must be less than of equal to 100): ")
 let limitOfInputs = 100;
-let rowInput = 64;
-let colInput = 64;
+
 
 /* Helper Function: changes the background color */
 let changeBackgroundColor = (item) => {
-    item.style.backgroundColor = "red";
+    item.style.backgroundColor = "black";
 }
 
-let adjustPadding = (item) = {
-    
+/* Based on the height and width of the sides adjust the padding */
+let adjustPadding = (item) => {
+    if(rowInput == 100 && colInput == 100){
+        item.style.padding = "4px";
+    }else if((rowInput <= 99 && rowInput >= 64) 
+        && (colInput <= 99 && colInput >= 64)){
+            item.style.padding ="3px";
+    }else if((rowInput <= 63 && rowInput >= 50) 
+    && (colInput <= 63 && colInput >= 50)){
+        item.style.padding = "5px";
+    }else if((rowInput <= 49 && rowInput >= 20) 
+    && (colInput <= 49 && colInput >= 20)){
+        item.style.padding = "8px";
+    }else{
+        item.style.padding = "10px";
+    }
 }
 
 for(let row = 0; row < rowInput; row++) {
@@ -25,15 +38,9 @@ for(let row = 0; row < rowInput; row++) {
         pixel.classList.add('grid-box');
         pixel.classList.add('hover');
         pixel.textContent = " ";
-        pixel.style.border = "1px solid black";
-        if(rowInput <= 16 && colInput <= 16){
-            pixel.style.padding = "10px";
-        }else if(rowInput <= 20 && colInput <= 20){
-            pixel.style.padding = "5px";
-        }else if(rowInput <= 64 && colInput <= 64){
-            pixel.style.padding = "3px";
-        }
-        pixel.style.backgroundColor = "white";
+        pixel.style.border = "0.5px solid #f5f5dc";
+        adjustPadding(pixel);
+        pixel.style.backgroundColor = "#f0f8ff";
         pixel.addEventListener('mouseover',  () => {
             // pixel.style.backgroundColor = "red";
             changeBackgroundColor(pixel);
